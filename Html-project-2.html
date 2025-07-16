@@ -1,65 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delicious Bites Menu</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link rel="stylesheet" href="menu-styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>La Delizia – Signature Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        /* Define custom colors from your palette */
+        :root {
+            --dark-green: #0C3B2E;
+            --muted-green: #8D9773;
+            --white: white;
+            --vibrant-gold: #FFBA00;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--dark-green); /* Primary Background */
+            color: #ffffff; /* Default text color on dark background */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--vibrant-gold); /* Headings in Gold */
+        }
+        .text-brown-tan {
+            color: white; /* For descriptions and secondary text */
+            font-weight: 800;
+        }
+
+        /* Custom Styles for Menu Card Design */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .menu-card {
+            background-color: var(--muted-green); /* Muted Green for card background */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Darker shadow for depth */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* For potential background elements */
+            overflow: hidden; /* Ensure nothing spills out of rounded corners */
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(255, 186, 0, 0.3); /* Gold-tinted shadow on hover */
+        }
+        .menu-card-title {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem; /* Adjust as needed */
+            font-weight: 700;
+        }
+        .menu-card-price {
+            font-size: 1.25rem; /* Slightly smaller than title but still prominent */
+            font-weight: 700;
+            color: #ffffff; /* White price on Muted Green */
+        }
+        .menu-card-description {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: var(--brown-tan); /* Brown/Tan for descriptions */
+        }
+        .image-slot {
+            width: 100%;
+            height: 180px; /* Slightly shorter to fit more text/elements */
+            background-color: var(--dark-green); /* Dark Green for image placeholder */
+            border-radius: 8px;
+            background-position: center;
+            background-size: cover;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3); /* Inner shadow for depth */
+        }
+
+        /* Section Title Styling to match menu card design */
+        .modern-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.75rem; /* Larger for impact */
+            font-weight: 700;
+            color: var(--vibrant-gold);
+            text-align: center;
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 0.5rem;
+            text-transform: uppercase; /* Match the "MENU CARD DESIGN" text */
+            letter-spacing: 0.1em; /* Add some spacing */
+        }
+        .modern-section-title::after {
+            content: '';
+            display: block;
+            width: 80px; /* Short line beneath */
+            height: 4px;
+            background-color: var(--vibrant-gold);
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.2s; }
+        .menu-card:nth-child(3) { animation-delay: 0.3s; }
+        .menu-card:nth-child(4) { animation-delay: 0.4s; }
+        .menu-card:nth-child(5) { animation-delay: 0.5s; }
+        .menu-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Media Queries (Adjusted for Tailwind breakpoints) */
+        @media (min-width: 768px) { /* md breakpoint */
+            .px-md-20 { padding-left: 5rem; padding-right: 5rem; } /* Tailwind default px-20 is 5rem */
+            .modern-section-title { font-size: 3.5rem; }
+        }
+        @media (max-width: 767px) { /* smaller than md */
+            .text-5xl { font-size: 2.5rem; } /* Adjusted from your original code's desktop 5xl */
+            .text-3xl { font-size: 1.75rem; }
+            .text-2xl { font-size: 1.5rem; }
+            .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .modern-section-title { font-size: 2.25rem; }
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Delicious Bites Menu</h1>
 
-        <h2>Appetizers</h2>
-        <ul>
-            <li>
-                <strong>Caprese Salad</strong>
-                <p>Fresh tomatoes, mozzarella, and basil drizzled with balsamic glaze.</p>
-            </li>
-            <li>
-                <strong>Crispy Calamari</strong>
-                <p>Lightly breaded calamari rings served with zesty marinara sauce.</p>
-            </li>
-            <li>
-                <strong>Spinach Artichoke Dip</strong>
-                <p>Creamy blend of spinach, artichoke, and cheese, baked until bubbly and served with warm tortilla chips.</p>
-            </li>
-        </ul>
+<body class="px-6 py-12 md:px-20 md:py-16">
+    <header class="text-center mb-16">
+        <img src="./Image/logo.png" alt="La Delizia Logo" class="w-40 h-40 mx-auto mb-4 object-contain">
+        <h1 class="text-5xl font-bold uppercase tracking-wider leading-none text-vibrant-gold">La Delizia</h1>
+        <p class="text-white-200 mt-2 italic text-lg text-brown-tan">Modern Italian Dining. World-Class Experience.</p>
+    </header>
 
-        <h2>Main Courses</h2>
-        <ul>
-            <li>
-                <strong>Grilled Salmon</strong>
-                <p>Salmon fillet seasoned and grilled to perfection, served with lemon butter sauce.</p>
-            </li>
-            <li>
-                <strong>Chicken Parmesan</strong>
-                <p>Breaded chicken breast topped with melted mozzarella and rich tomato sauce, served with spaghetti.</p>
-            </li>
-            <li>
-                <strong>Vegetable Lasagna</strong>
-                <p>Layers of fresh pasta, roasted vegetables, and a creamy ricotta blend, baked to golden perfection.</p>
-            </li>
-        </ul>
+    <section class="mb-20">
+        <h2 class="modern-section-title">Menu Highlights</h2>
+        <div class="menu-grid mt-10">
 
-        <h2>Desserts</h2>
-        <ul>
-            <li>
-                <strong>Chocolate Fondue</strong>
-                <p>Assorted fruits and marshmallows served with rich chocolate fondue.</p>
-            </li>
-            <li>
-                <strong>New York Cheesecake</strong>
-                <p>Classic creamy cheesecake with a graham cracker crust, topped with your choice of berry compote or chocolate drizzle.</p>
-            </li>
-            <li>
-                <strong>Warm Apple Crumble</strong>
-                <p>Spiced apples baked under a buttery oat crumble, served with a scoop of vanilla bean ice cream.</p>
-            </li>
-        </ul>
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7440.jpeg');"></div>
+                <h4 class="menu-card-title">Risotto al Tartufo <span class="menu-card-price">$32</span></h4>
+                <p class="menu-card-description text-white">Creamy truffle risotto topped with shaved black truffles and Parmigiano-Reggiano.</p>
+            </div>
 
-        <p class="contact-link"><a href="contact.html">Contact us for reservations</a></p>
-    </div>
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7442.jpeg');"></div>
+                <h4 class="menu-card-title">Lobster Ravioli <span class="menu-card-price">$36</span></h4>
+                <p class="menu-card-description">Handmade ravioli filled with lobster in saffron cream sauce.</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7443.jpeg');"></div>
+                <h4 class="menu-card-title">Filetto di Manzo <span class="menu-card-price">$45</span></h4>
+                <p class="menu-card-description">Char-grilled beef tenderloin with red wine reduction and roasted vegetables.</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7444.jpeg');"></div>
+                <h4 class="menu-card-title">Gnocchi al Pesto <span class="menu-card-price">$24</span></h4>
+                <p class="menu-card-description">Soft potato gnocchi tossed in Genovese basil pesto and pine nuts.</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7439.jpeg');"></div>
+                <h4 class="menu-card-title">Tiramisu Eleganza <span class="menu-card-price">$12</span></h4>
+                <p class="menu-card-description">Layered espresso-soaked ladyfingers with mascarpone mousse and cocoa dusting.</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="image-slot" style="background-image: url('./Image/IMG_7445.jpeg');"></div>
+                <h4 class="menu-card-title">Amalfi Lemon Tart <span class="menu-card-price">$11</span></h4>
+                <p class="menu-card-description">Zesty lemon custard on a buttery crust with burnt Italian meringue.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-14 px-4 md:px-20 bg-dark-green">
+        <h3 class="modern-section-title">Guest Testimonials</h3>
+        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="bg-muted-green p-6 rounded-lg shadow-lg">
+                <i class="fas fa-star text-vibrant-gold mb-2 text-xl"></i> <p class="italic text-gray-100 text-brown-tan">“Dining here felt like a scene from a romantic Italian movie. The ambiance, the plating, the flavor – perfection.”</p>
+                <p class="mt-3 font-semibold text-vibrant-gold">– Amanda, NYC</p>
+            </div>
+            <div class="bg-muted-green p-6 rounded-lg shadow-lg">
+                <i class="fas fa-star text-vibrant-gold mb-2 text-xl"></i>
+                <p class="italic text-gray-100 text-brown-tan">“Hands down the best ravioli I've had outside of Florence. Will definitely return with clients.”</p>
+                <p class="mt-3 font-semibold text-vibrant-gold">– Lucas, London</p>
+            </div>
+            <div class="bg-muted-green p-6 rounded-lg shadow-lg">
+                <i class="fas fa-star text-vibrant-gold mb-2 text-xl"></i>
+                <p class="italic text-gray-100 text-brown-tan">“As a chef myself, I rarely say this — but this place deserves a Michelin star.”</p>
+                <p class="mt-3 font-semibold text-vibrant-gold">– Chef Rosario, Rome</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-sm mt-16 text-gray-400">
+        <div class="my-4">
+            <a href="#" class="mx-2 text-vibrant-gold hover:text-white transition-colors duration-300"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="#" class="mx-2 text-vibrant-gold hover:text-white transition-colors duration-300"><i class="fab fa-facebook text-2xl"></i></a>
+            <a href="#" class="mx-2 text-vibrant-gold hover:text-white transition-colors duration-300"><i class="fab fa-tripadvisor text-2xl"></i></a>
+        </div>
+        <p>&copy; 2025 La Delizia Ristorante. Designed with flair by <span class="text-vibrant-gold">[Your Name]</span>.</p>
+    </footer>
 </body>
 </html>

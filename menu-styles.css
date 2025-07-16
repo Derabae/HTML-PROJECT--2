@@ -1,16 +1,15 @@
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #fdfaf6;
-    color: #333;
+    background-color: #b75c27;
+    color: #000000;
     line-height: 1.6;
 }
 .container {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #e2e2dc;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
 }
 h1 {
     color: #d97706;
@@ -25,8 +24,8 @@ h2 {
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #fcd34d;
-    font-weight: 600;
+    border-bottom: 2px solid #ffcc24;
+    font-weight: 800;
 }
 ul {
     list-style: none;
@@ -40,16 +39,17 @@ li {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); 
 }
 strong {
-    color: #d97706;
+    color: #6b3c06;
     font-size: 1.25rem;
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 600;
+    font-weight: 800;
 }
 p {
     font-size: 1rem;
-    color: #555;
+    color: #000000;
     margin-top: 0;
+    font-weight: 700;
     margin-bottom: 0;
 }
 .contact-link {
